@@ -1,0 +1,48 @@
+package com.example.apptest
+
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val Peso = findViewById<EditText>(R.id.Peso)
+        val Altura = findViewById<EditText>(R.id.Altura)
+        val ResultadoBotao = findViewById<Button>(R.id.ResultadoBotao)
+        val TextoResultado = findViewById<TextView>(R.id.TextoResultado)
+
+        TextoResultado.setTextSize(28F);
+        ResultadoBotao.setOnClickListener {
+
+            if(Peso.text.toString().trim().isNotEmpty() && Altura.text.toString().trim()
+                    .isNotEmpty()
+            ) {
+                val PesoR = Peso.text.toString().toDouble()
+                val AlturaR = Altura.text.toString().toDouble()
+
+                var ResultadoIMC = PesoR / (AlturaR * AlturaR)
+
+                if (ResultadoIMC<18.5){
+                    TextoResultado.text = "Abaixo do Peso"
+                } else if(ResultadoIMC>18.5 && ResultadoIMC<24.9) {
+                    TextoResultado.text = "Peso Normal"
+                } else if(ResultadoIMC>25 && ResultadoIMC<29.9) {
+                    TextoResultado.text = "Sobrepeso"
+                } else{
+                    TextoResultado.text = "Obesidade"
+                }
+
+            }
+        }
+
+    }
+}
